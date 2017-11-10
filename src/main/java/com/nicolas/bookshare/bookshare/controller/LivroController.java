@@ -37,7 +37,7 @@ public class LivroController {
     @RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
     public LivroResponseDTO cadastrar(@RequestParam String autor,
                                       @RequestParam String descricao,
-                                      @RequestParam(defaultValue = "imgs/sem-imagem.jpg", required = false) String imagem,
+                                      @RequestParam String imagem,
                                       @RequestParam String isbn,
                                       @RequestParam String titulo,
                                       @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date dataPublicacao) {

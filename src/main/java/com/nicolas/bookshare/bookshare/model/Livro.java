@@ -30,12 +30,13 @@ public class Livro {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dataPublicacao;
 
-    public Livro(String isbn, String titulo, String autor, String descricao, Date dataPublicacao) {
+    public Livro(String isbn, String titulo, String autor, String descricao, String imagem, Date dataPublicacao) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.autor = autor;
         this.descricao = descricao;
         this.dataPublicacao = dataPublicacao;
+        this.imagem = imagem;
     }
 
     public Livro() {}
