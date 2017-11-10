@@ -89,8 +89,7 @@ public class LivroController {
         }
     }
 
-    @ApiOperation("Encontrar livro por id")
-    @RequestMapping(value = "/find-by-id", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
     public void delete(String id) {
 
         AnuncioResponseDTO result;
