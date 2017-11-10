@@ -39,4 +39,8 @@ public class LivroService {
 
         return new LivroResponseDTO(true, livro);
     }
+
+    public void delete(String id){
+        livroRepository.delete(id);
+    }
 }

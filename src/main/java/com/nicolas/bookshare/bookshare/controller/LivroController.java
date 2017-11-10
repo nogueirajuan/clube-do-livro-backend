@@ -2,6 +2,7 @@ package com.nicolas.bookshare.bookshare.controller;
 
 import com.nicolas.bookshare.bookshare.model.Livro;
 import com.nicolas.bookshare.bookshare.model.request.LivroDTO;
+import com.nicolas.bookshare.bookshare.model.response.AnuncioResponseDTO;
 import com.nicolas.bookshare.bookshare.model.response.LivroResponseDTO;
 import com.nicolas.bookshare.bookshare.repository.LivroRepository;
 import com.nicolas.bookshare.bookshare.service.AnuncioService;
@@ -91,6 +92,12 @@ public class LivroController {
     @ApiOperation("Encontrar livro por id")
     @RequestMapping(value = "/find-by-id", method = RequestMethod.POST)
     public void delete(String id) {
-        livroRepository.delete(id);
+
+        AnuncioResponseDTO result;
+        try{
+            livroService.delete(id);
+        }catch (Exception e){
+            result = new AnuncioResponseDTO(false);
+        }
     }
 }
