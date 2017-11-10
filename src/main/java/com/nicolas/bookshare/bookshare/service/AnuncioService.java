@@ -33,6 +33,10 @@ public class AnuncioService {
         return anuncioRepository.findById(id);
     }
 
+    public List<Anuncio> findByUsername(String username){
+        return anuncioRepository.findByAnunciante_Username(username);
+    }
+
     public AnuncioResponseDTO cadastrar(AnuncioDTO anuncioDTO) {
         Anuncio anuncio;
         try {

@@ -63,8 +63,8 @@ public class LivroController {
 
 
     @ApiOperation("Encontrar livros")
-    @RequestMapping(value = "/findAll", method = RequestMethod.POST)
-    public LivroResponseDTO findAll(@RequestBody LivroDTO livroDTO) {
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
+    public LivroResponseDTO findAll() {
         LivroResponseDTO result;
         try {
             result = new LivroResponseDTO(true, livroService.findAll());

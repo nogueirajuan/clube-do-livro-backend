@@ -64,6 +64,18 @@ public class AnuncioController {
         return result;
     }
 
+    @RequestMapping(value = "/find-by-username", method = RequestMethod.GET)
+    public AnuncioResponseDTO findByUsername(String username) {
+
+        AnuncioResponseDTO result;
+        try{
+            result = new AnuncioResponseDTO(true, anuncioService.findByUsername(username));
+        }catch (Exception e){
+            result = new AnuncioResponseDTO(false);
+        }
+        return result;
+    }
+
     @RequestMapping(value = "/find-all-by-isbn", method = RequestMethod.GET)
     public AnuncioResponseDTO findAllByIsbn(String isbn) {
 
