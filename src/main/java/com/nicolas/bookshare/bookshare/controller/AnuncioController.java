@@ -111,4 +111,15 @@ public class AnuncioController {
         }
         return result;
     }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public void delete(Long id) {
+
+        AnuncioResponseDTO result;
+        try{
+            anuncioService.delete(id);
+        }catch (Exception e){
+            result = new AnuncioResponseDTO(false);
+        }
+    }
 }

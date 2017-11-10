@@ -51,4 +51,8 @@ public class AnuncioService {
 
         return new AnuncioResponseDTO(true, anuncio);
     }
+
+    public void delete(Long id){
+        anuncioRepository.delete(id);
+    }
 }
