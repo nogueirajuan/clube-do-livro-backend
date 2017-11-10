@@ -30,7 +30,7 @@ public class LivroService {
         Livro livro;
         try {
             livro = new Livro(livroDTO.getIsbn(), livroDTO.getTitulo(), livroDTO.getAutor(),
-                    livroDTO.getDescricao(), livroDTO.getDataPublicacao());
+                    livroDTO.getDescricao(), livroDTO.getImagem(), livroDTO.getDataPublicacao());
             livroRepository.save(livro);
         } catch (Exception e) {
             e.printStackTrace();
