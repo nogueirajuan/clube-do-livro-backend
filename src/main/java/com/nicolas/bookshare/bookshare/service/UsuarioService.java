@@ -44,6 +44,17 @@ public class UsuarioService {
         return new UsuarioResponseDTO(true, usuario);
     }
 
+    public UsuarioResponseDTO findByUsername(UsuarioDTO usuarioDTO) {
+
+        try {
+            Usuario usuarioByUsername = usuarioRepository.findUsuarioByUsername(usuarioDTO.getUsername());
+            return new UsuarioResponseDTO(true, usuarioByUsername);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new UsuarioResponseDTO(false);
+        }
+    }
+
     private Date getDataFromString(String dataNascimento) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.parse(dataNascimento);

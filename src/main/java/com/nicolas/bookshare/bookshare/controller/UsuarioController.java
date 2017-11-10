@@ -55,4 +55,14 @@ public class UsuarioController {
 
         return usuarioService.cadastrar(usuarioDTO);
     }
+
+    @ApiOperation("Cadastrar usuário")
+    @RequestMapping(value = "/find-by-username", method = RequestMethod.POST)
+    public UsuarioResponseDTO findByUsername(@RequestParam String username) {
+
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setUsername(username);
+
+        return usuarioService.findByUsername(usuarioDTO);
+    }
 }
