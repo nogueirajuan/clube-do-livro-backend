@@ -87,4 +87,10 @@ public class LivroController {
             return result;
         }
     }
+
+    @ApiOperation("Encontrar livro por id")
+    @RequestMapping(value = "/find-by-id", method = RequestMethod.POST)
+    public void delete(String id) {
+        livroRepository.delete(id);
+    }
 }
