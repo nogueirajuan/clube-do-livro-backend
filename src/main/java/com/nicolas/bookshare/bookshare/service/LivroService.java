@@ -27,10 +27,16 @@ public class LivroService {
     }
 
     public LivroResponseDTO cadastrar(LivroDTO livroDTO) {
-        Livro livro;
+        Livro livro = new Livro();
         try {
-            livro = new Livro(livroDTO.getIsbn(), livroDTO.getTitulo(), livroDTO.getAutor(),
-                    livroDTO.getDescricao(), livroDTO.getImagem(), livroDTO.getDataPublicacao());
+            livro.setIsbn(livroDTO.getIsbn());
+            livro.setTitulo(livroDTO.getTitulo());
+            livro.setDescricao(livroDTO.getDescricao());
+            livro.setImagem(livroDTO.getImagem());
+            livro.setDataPublicacao(livroDTO.getDataPublicacao());
+            livro.setAutor(livroDTO.getAutor());
+            livro.setCategoria(livroDTO.getCategoria());
+
             livroRepository.save(livro);
         } catch (Exception e) {
             e.printStackTrace();

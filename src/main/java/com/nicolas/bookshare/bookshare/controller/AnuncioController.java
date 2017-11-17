@@ -1,6 +1,5 @@
 package com.nicolas.bookshare.bookshare.controller;
 
-import com.nicolas.bookshare.bookshare.model.Anuncio;
 import com.nicolas.bookshare.bookshare.model.request.AnuncioDTO;
 import com.nicolas.bookshare.bookshare.model.response.AnuncioResponseDTO;
 import com.nicolas.bookshare.bookshare.repository.AnuncioRepository;
@@ -8,9 +7,10 @@ import com.nicolas.bookshare.bookshare.service.AnuncioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @Api("Anúncios")
 @RestController
@@ -106,6 +106,30 @@ public class AnuncioController {
         AnuncioResponseDTO result;
         try{
             result = new AnuncioResponseDTO(true, anuncioService.findById(id));
+        }catch (Exception e){
+            result = new AnuncioResponseDTO(false);
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/find-by-like-book-name", method = RequestMethod.GET)
+    public AnuncioResponseDTO findByLikeBookName(String bookName) {
+
+        AnuncioResponseDTO result;
+        try{
+            result = anuncioService.findByLikeBookName(bookName);
+        }catch (Exception e){
+            result = new AnuncioResponseDTO(false);
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/find-all-by-category", method = RequestMethod.GET)
+    public AnuncioResponseDTO findAllByCategoryId(Long idCategoria) {
+
+        AnuncioResponseDTO result;
+        try{
+            result = anuncioService.findAllByCategoria(idCategoria);
         }catch (Exception e){
             result = new AnuncioResponseDTO(false);
         }

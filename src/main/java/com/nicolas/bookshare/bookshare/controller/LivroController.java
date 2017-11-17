@@ -1,5 +1,6 @@
 package com.nicolas.bookshare.bookshare.controller;
 
+import com.nicolas.bookshare.bookshare.model.Categoria;
 import com.nicolas.bookshare.bookshare.model.Livro;
 import com.nicolas.bookshare.bookshare.model.request.LivroDTO;
 import com.nicolas.bookshare.bookshare.model.response.AnuncioResponseDTO;
@@ -35,12 +36,14 @@ public class LivroController {
 
     @ApiOperation("Cadastrar um livro")
     @RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-    public LivroResponseDTO cadastrar(@RequestParam String autor,
-                                      @RequestParam String descricao,
-                                      @RequestParam String imagem,
-                                      @RequestParam String isbn,
-                                      @RequestParam String titulo,
-                                      @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date dataPublicacao) {
+    public LivroResponseDTO cadastrar(
+            @RequestParam String titulo,
+            @RequestParam String autor,
+            @RequestParam String descricao,
+            @RequestParam String imagem,
+            @RequestParam String isbn,
+            @RequestParam Long idCategoria,
+            @RequestParam @DateTimeFormat(pattern = "dd/MM/yyyy") Date dataPublicacao) {
 
         LivroResponseDTO livroResponseDTO = new LivroResponseDTO();
 
@@ -51,6 +54,7 @@ public class LivroController {
         novoLivro.setIsbn(isbn);
         novoLivro.setTitulo(titulo);
         novoLivro.setImagem(imagem);
+        novoLivro.setCategoria(new Categoria(idCategoria));
 
         try {
             livroResponseDTO = livroService.cadastrar(novoLivro);
@@ -93,9 +97,9 @@ public class LivroController {
     public void delete(String id) {
 
         AnuncioResponseDTO result;
-        try{
+        try {
             livroService.delete(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             result = new AnuncioResponseDTO(false);
         }
     }

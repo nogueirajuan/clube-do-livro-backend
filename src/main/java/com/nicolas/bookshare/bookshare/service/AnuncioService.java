@@ -1,12 +1,14 @@
 package com.nicolas.bookshare.bookshare.service;
 
 import com.nicolas.bookshare.bookshare.model.Anuncio;
+import com.nicolas.bookshare.bookshare.model.Categoria;
 import com.nicolas.bookshare.bookshare.model.request.AnuncioDTO;
 import com.nicolas.bookshare.bookshare.model.response.AnuncioResponseDTO;
 import com.nicolas.bookshare.bookshare.repository.AnuncioRepository;
 import com.nicolas.bookshare.bookshare.repository.LivroRepository;
 import com.nicolas.bookshare.bookshare.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +37,32 @@ public class AnuncioService {
 
     public List<Anuncio> findByUsername(String username){
         return anuncioRepository.findByAnunciante_Username(username);
+    }
+
+    public AnuncioResponseDTO findByLikeBookName(String bookName){
+        List<Anuncio> anuncios;
+        try {
+            anuncios = anuncioRepository.findByLikeBookName(bookName);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new AnuncioResponseDTO(false);
+        }
+
+        return new AnuncioResponseDTO(true, anuncios);
+    }
+
+    public AnuncioResponseDTO findAllByCategoria(Long idCategoria){
+        List<Anuncio> anuncios;
+        try {
+            anuncios = anuncioRepository.findByCategoriaLivro(idCategoria);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new AnuncioResponseDTO(false);
+        }
+
+        return new AnuncioResponseDTO(true, anuncios);
     }
 
     public AnuncioResponseDTO cadastrar(AnuncioDTO anuncioDTO) {

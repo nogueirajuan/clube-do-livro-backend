@@ -1,8 +1,10 @@
 package com.nicolas.bookshare.bookshare.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table
@@ -22,13 +24,12 @@ public class Avaliacao {
     @Column
     private String descricao;
 
-    public Avaliacao(Livro livro, Usuario anunciante, String descricao) {
-        this.livro = livro;
-        this.anunciante = anunciante;
-        this.descricao = descricao;
-    }
+    @Column
+    private Integer avaliacao;
 
-    public Avaliacao() {}
+    @Column
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date dataPublicacao;
 
     public Long getId() {
         return id;
@@ -60,5 +61,21 @@ public class Avaliacao {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Integer getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(Integer avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+
+    public Date getDataPublicacao() {
+        return dataPublicacao;
+    }
+
+    public void setDataPublicacao(Date dataPublicacao) {
+        this.dataPublicacao = dataPublicacao;
     }
 }

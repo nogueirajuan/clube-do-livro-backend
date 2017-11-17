@@ -1,6 +1,7 @@
 package com.nicolas.bookshare.bookshare.model.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.nicolas.bookshare.bookshare.model.Categoria;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,6 +15,7 @@ public class LivroDTO {
     private String descricao;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dataPublicacao;
+    private Categoria categoria;
 
     public String getIsbn() {
         return isbn;
@@ -61,5 +63,13 @@ public class LivroDTO {
 
     public void setDataPublicacao(Date dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }
