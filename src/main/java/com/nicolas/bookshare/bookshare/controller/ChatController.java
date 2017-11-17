@@ -6,12 +6,10 @@ import com.nicolas.bookshare.bookshare.repository.MensagemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @RestController
+@CrossOrigin
 public class ChatController {
     private MensagemRepository mensagemRepository;
 
@@ -22,6 +20,7 @@ public class ChatController {
 
     @PostMapping("/enviar-mensagem")
     public MensagemResponse enviarMensagem(@RequestBody Mensagem mensagem) {
+        mensagem.setSendDate(new Date());
         MensagemResponse response = new MensagemResponse();
         try {
             mensagemRepository.save(mensagem);

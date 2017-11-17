@@ -18,6 +18,5 @@ public class Mensagem {
     private String sender;
     private String receiver;
     private String content;
-    @JsonFormat(pattern = "dd/MM/yy HH:mm:ss")
     private Date sendDate;
 }
