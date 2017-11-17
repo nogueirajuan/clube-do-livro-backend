@@ -49,11 +49,17 @@ public class ChatController {
     @GetMapping("/get-destinatarios")
     public List<String> getDestinatarios(@RequestParam("sender") String sender) {
         try {
-            List<Mensagem> mensagens = mensagemRepository.findMensagemDistinctBySender(sender);
+            List<Mensagem> mensagensBySender = mensagemRepository.findMensagemDistinctBySender(sender);
+            List<Mensagem> mensagensByReceiver = mensagemRepository.findMensagemDistinctByReceiver(sender);
             List<String> destinatarios = new ArrayList<>();
-            for (Mensagem mensagem : mensagens) {
+            for (Mensagem mensagem : mensagensBySender) {
                 if(!destinatarios.contains(mensagem.getReceiver())) {
                     destinatarios.add(mensagem.getReceiver());
+                }
+            }
+            for (Mensagem mensagem : mensagensByReceiver) {
+                if(!destinatarios.contains(mensagem.getSender())) {
+                    destinatarios.add(mensagem.getSender());
                 }
             }
             return destinatarios;

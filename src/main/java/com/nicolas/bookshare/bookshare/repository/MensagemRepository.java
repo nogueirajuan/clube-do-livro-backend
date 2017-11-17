@@ -9,4 +9,5 @@ import java.util.List;
 public interface MensagemRepository extends JpaRepository<Mensagem, Long> {
     List<Mensagem> findBySenderAndReceiver(String sender, String receiver);
     List<Mensagem> findMensagemDistinctBySender(String sender);
+    List<Mensagem> findMensagemDistinctByReceiver(String receiver);
 }
