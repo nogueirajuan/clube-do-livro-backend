@@ -21,7 +21,7 @@ public interface AnuncioRepository extends CrudRepository<Anuncio, Long> {
     List<Anuncio> findByLivro_Isbn(@Param("isbn") String isbn);
     List<Anuncio> findByAnunciante_Username(@Param("username") String username);
 
-    @Query("select anuncio from Anuncio anuncio where anuncio.livro.titulo like %:bookName%")
+    @Query("select anuncio from Anuncio anuncio where LOWER(anuncio.livro.titulo) like LOWER(%:bookName%)")
     List<Anuncio> findByLikeBookName(@Param("bookName") String bookName);
 
     @Query("select anuncio from Anuncio anuncio where anuncio.livro.categoria.id = :IDCATEGORIA")

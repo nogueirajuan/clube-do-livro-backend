@@ -36,7 +36,20 @@ public class CategoriaController {
         }
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ApiOperation("Encontrar todas categorias")
+    @RequestMapping(value = "/find-all", method = RequestMethod.GET)
+    public CategoriaResponseDTO findAll() {
+
+        CategoriaResponseDTO categoriaResponseDTO = new CategoriaResponseDTO();
+
+        try {
+            return categoriaResponseDTO = categoriaService.findAll();
+        } catch (Exception e) {
+            return new CategoriaResponseDTO(false);
+        }
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public void delete(String id) {
 
         CategoriaResponseDTO result;

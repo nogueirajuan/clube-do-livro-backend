@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CategoriaService {
@@ -32,6 +33,19 @@ public class CategoriaService {
         }
 
         return new CategoriaResponseDTO(true, categoria);
+    }
+
+    public CategoriaResponseDTO findAll() {
+        CategoriaResponseDTO response = new CategoriaResponseDTO();
+        try {
+            response.setCategorias(categoriaRepository.findAll());
+            response.setDataExecucao(new Date());
+            response.setSucesso(true);
+        } catch (Exception e) {
+            response.setSucesso(false);;
+        }
+
+        return response;
     }
 
     public CategoriaResponseDTO delete(CategoriaDTO categoriaDTO) {

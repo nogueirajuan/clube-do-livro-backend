@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -12,18 +13,22 @@ import java.util.Date;
 public class Livro {
     @Column
     @Id
+    @Size(max = 250)
     private String isbn;
 
     @Column
+    @Size(max = 250)
     private String titulo;
 
-    @Column
+    @Column(length = 500)
+    @Size(max = 500)
     private String imagem;
 
     @Column
+    @Size(max = 250)
     private String autor;
 
-    @Column
+    @Column(length = 2000)
     private String descricao;
 
     @Column

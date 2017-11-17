@@ -40,6 +40,10 @@ public class Usuario {
         this.dataNascimento = dataNascimento;
     }
 
+    public Usuario(String username) {
+        this.username = username;
+    }
+
     public Usuario() {
     }
 
