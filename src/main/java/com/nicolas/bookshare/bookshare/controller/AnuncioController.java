@@ -1,5 +1,6 @@
 package com.nicolas.bookshare.bookshare.controller;
 
+import com.nicolas.bookshare.bookshare.model.Anuncio;
 import com.nicolas.bookshare.bookshare.model.Avaliacao;
 import com.nicolas.bookshare.bookshare.model.request.AnuncioDTO;
 import com.nicolas.bookshare.bookshare.model.response.AnuncioResponseDTO;
@@ -52,6 +53,20 @@ public class AnuncioController {
         AnuncioResponseDTO result;
         try {
             result = new AnuncioResponseDTO(true, anuncioService.findAll());
+        } catch (Exception e) {
+            result = new AnuncioResponseDTO(false);
+        }
+        return result;
+    }
+
+    @ApiOperation("Listar anuncios por avaliacao")
+    @RequestMapping(value = "/find-all-order-avaliacao", method = RequestMethod.GET)
+    public AnuncioResponseDTO findAllOrderByAvaliacao() {
+
+        AnuncioResponseDTO result;
+        List<Anuncio> anuncios = anuncioService.findAllOrderByAvaliacao();
+        try {
+            result = new AnuncioResponseDTO(true, anuncios);
         } catch (Exception e) {
             result = new AnuncioResponseDTO(false);
         }

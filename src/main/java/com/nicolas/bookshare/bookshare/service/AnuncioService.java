@@ -35,6 +35,25 @@ public class AnuncioService {
         return anuncioRepository.findAll();
     }
 
+    public List<Anuncio> findAllOrderByAvaliacao(){
+        List<Anuncio> anuncios = anuncioRepository.findAll();
+        for (Anuncio anuncio : anuncios) {
+            List<Avaliacao> avaliacoes = avaliacaoRepository.findAllByLivro(anuncio.getLivro());
+            float media = 0;
+            for (Avaliacao avaliacao : avaliacoes) {
+                media += avaliacao.getAvaliacao();
+            }
+            media = media/avaliacoes.size();
+            anuncio.getLivro().setMediaAvaliacoes(media);
+            System.out.println("Média do livro " + anuncio.getLivro().getTitulo() + ": " + media);
+        }
+        anuncios.forEach(System.out::println);
+        anuncios.sort(Comparator.comparing(anuncio -> anuncio.getLivro().getMediaAvaliacoes()));
+        Collections.reverse(anuncios);
+        anuncios.forEach(System.out::println);
+        return anuncios;
+    }
+
 
     public Anuncio findById(Long id){
         return anuncioRepository.findById(id);
