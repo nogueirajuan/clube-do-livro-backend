@@ -20,4 +20,6 @@ public interface AvaliacaoRepository extends CrudRepository<Avaliacao, Long> {
     Avaliacao findById(@Param("id") Long id);
 
     List<Avaliacao> findByLivroOrderByIdDesc(Livro livro);
+
+    List<Avaliacao> findAllByLivro(Livro livro);
 }

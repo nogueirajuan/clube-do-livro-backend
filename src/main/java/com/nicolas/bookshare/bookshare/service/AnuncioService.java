@@ -1,16 +1,19 @@
 package com.nicolas.bookshare.bookshare.service;
 
 import com.nicolas.bookshare.bookshare.model.Anuncio;
-import com.nicolas.bookshare.bookshare.model.Categoria;
+import com.nicolas.bookshare.bookshare.model.Avaliacao;
 import com.nicolas.bookshare.bookshare.model.request.AnuncioDTO;
 import com.nicolas.bookshare.bookshare.model.response.AnuncioResponseDTO;
 import com.nicolas.bookshare.bookshare.repository.AnuncioRepository;
+import com.nicolas.bookshare.bookshare.repository.AvaliacaoRepository;
 import com.nicolas.bookshare.bookshare.repository.LivroRepository;
 import com.nicolas.bookshare.bookshare.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -18,12 +21,14 @@ public class AnuncioService {
     private final UsuarioRepository usuarioRepository;
     private final LivroRepository livroRepository;
     private final AnuncioRepository anuncioRepository;
+    private final AvaliacaoRepository avaliacaoRepository;
 
     @Autowired
-    public AnuncioService(UsuarioRepository usuarioRepository, LivroRepository livroRepository, AnuncioRepository anuncioRepository) {
+    public AnuncioService(UsuarioRepository usuarioRepository, LivroRepository livroRepository, AnuncioRepository anuncioRepository, AvaliacaoRepository avaliacaoRepository) {
         this.usuarioRepository = usuarioRepository;
         this.livroRepository = livroRepository;
         this.anuncioRepository = anuncioRepository;
+        this.avaliacaoRepository = avaliacaoRepository;
     }
 
     public List<Anuncio> findAll(){
@@ -56,7 +61,20 @@ public class AnuncioService {
         List<Anuncio> anuncios;
         try {
             anuncios = anuncioRepository.findByCategoriaLivro(idCategoria);
-
+            for (Anuncio anuncio : anuncios) {
+                List<Avaliacao> avaliacoes = avaliacaoRepository.findAllByLivro(anuncio.getLivro());
+                float media = 0;
+                for (Avaliacao avaliacao : avaliacoes) {
+                    media += avaliacao.getAvaliacao();
+                }
+                media = media/avaliacoes.size();
+                anuncio.getLivro().setMediaAvaliacoes(media);
+                System.out.println("Média do livro " + anuncio.getLivro().getTitulo() + ": " + media);
+            }
+            anuncios.forEach(System.out::println);
+            anuncios.sort(Comparator.comparing(anuncio -> anuncio.getLivro().getMediaAvaliacoes()));
+            Collections.reverse(anuncios);
+            anuncios.forEach(System.out::println);
         } catch (Exception e) {
             e.printStackTrace();
             return new AnuncioResponseDTO(false);

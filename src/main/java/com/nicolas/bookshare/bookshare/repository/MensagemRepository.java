@@ -2,6 +2,7 @@ package com.nicolas.bookshare.bookshare.repository;
 
 import com.nicolas.bookshare.bookshare.model.Mensagem;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

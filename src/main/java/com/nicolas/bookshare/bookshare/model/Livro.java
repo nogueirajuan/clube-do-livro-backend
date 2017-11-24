@@ -1,6 +1,7 @@
 package com.nicolas.bookshare.bookshare.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -37,6 +38,10 @@ public class Livro {
 
     @ManyToOne
     private Categoria categoria;
+
+    @JsonIgnore
+    @Column
+    private Float mediaAvaliacoes;
 
     public Livro() {}
 
